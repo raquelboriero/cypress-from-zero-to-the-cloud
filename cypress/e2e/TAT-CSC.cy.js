@@ -115,4 +115,17 @@ describe('TAT Customer Service Center', () => {
       cy.get('span[class="error"]').should('be.visible') 
     })
 
+
+    //EXERCISE 7 The test must make use of a fillMandatoryFieldsAndSubmit command, which must be implemented in the cypress/support/commands.js file.
+    // There must be verification that the success message is displayed.
+    it('successfully submits the form using a custom command', () => {
+    
+      cy.fillMandatoryFieldsAndSubmit()
+      cy.get('span[class="success"]')
+      .should('be.visible') 
+
+    })
+
+
+
 })
