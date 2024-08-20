@@ -41,6 +41,7 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (data = {}) => {
     cy.get('input[id="email"]').type(finalData.email)
     cy.get('textarea[id="open-text-area"]').type(finalData.message)
     cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Send')
 })
 
 
