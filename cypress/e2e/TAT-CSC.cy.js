@@ -1,3 +1,7 @@
+// npx cypress run --record --key d1e75291-8546-4a19-a9d5-8fbee7effa36
+
+
+
 describe('TAT Customer Service Center', () => {
 
   beforeEach(() => {
@@ -90,15 +94,30 @@ describe('TAT Customer Service Center', () => {
 
     
   it('0 - selects a product (YouTube) by its content', () => {
-    cy.get('select').select('YouTube').should('have.value', 'youtube')
+    cy.get('#product').select('YouTube').should('have.value', 'youtube')
     })
 
   it('1 - selects a product (Mentorship) by its value', () => {
-    cy.get('select').select('mentorship').should('have.value', 'mentorship')
+    cy.get('#product').select('mentorship').should('have.value', 'mentorship')
     })
 
-    it('2 - selects a product (Blog) by its index', () => {
-      cy.get('select').select(1).should('have.value', 'blog')
+  it('2 - selects a product (Blog) by its index', () => {
+    cy.get('#product').select(1).should('have.value', 'blog')
+    })
+
+    it('3 - checks the type of service "Feedback"', () => {
+      cy.get('input[type="radio"][value="feedback"]')
+      .check().should('be.checked')
+    })
+
+    it.only('4 - checks each type of service', () => {
+
+      cy.get('#support-type').find('input[type="radio"]')
+      .each(typeOfService => {
+        cy.wrap(typeOfService).check().should('be.checked')
       })
-  
+
+    })
+
 })
+
