@@ -8,8 +8,10 @@ describe('TAT Customer Service Center', () => {
     cy.title().should('eq','TAT Customer Service Center')
   })
 
+//SECTION 3 | LESSON 2-----------------------------------------------------------------------
+
   //EXERCISE + EXERCISE 1
-  it.only('1 - fills in the required fields and submits the form', () => {
+  it('1 - fills in the required fields and submits the form', () => {
     
     const longText = Cypress._.repeat('abcde', 100)
 
@@ -25,7 +27,7 @@ describe('TAT Customer Service Center', () => {
   })
 
   //EXERCISE 2 
-  it.only('2 - displays an error message when submitting the form with an email with invalid formatting', () => {
+  it('2 - displays an error message when submitting the form with an email with invalid formatting', () => {
     
     cy.get('#firstName').type('Raquel')
     cy.get('#lastName').type('Boriero')
@@ -37,14 +39,14 @@ describe('TAT Customer Service Center', () => {
   })
 
     //EXERCISE 3 
-  it.only('3 - validate that if a non-numeric value is entered, its value will remain empty', () => {
+  it('3 - validate that if a non-numeric value is entered, its value will remain empty', () => {
     
     cy.get('#phone').type('abc').should('have.value', '')
     
   })
 
     //EXERCISE 4 
-  it.only('4 - displays an error message when the phone becomes required but is not filled in before the form submission', () => {
+  it('4 - displays an error message when the phone becomes required but is not filled in before the form submission', () => {
     
     cy.get('#firstName').type('Raquel')
     cy.get('#lastName').type('Boriero')
@@ -57,7 +59,7 @@ describe('TAT Customer Service Center', () => {
   })
 
     //EXERCISE 5 
-    it.only('5 - fills and clears the first name, last name, email, and phone fields', () => {
+    it('5 - fills and clears the first name, last name, email, and phone fields', () => {
     
       cy.get('input[id="firstName"]').type('Raquel').should('have.value', 'Raquel').clear().should('have.value','')
       cy.get('input[id="lastName"]').type('Boriero').should('have.value', 'Boriero').clear().should('have.value','')
@@ -66,7 +68,7 @@ describe('TAT Customer Service Center', () => {
     })
 
     //EXERCISE 6 
-    it.only('6 - displays an error message when submitting the form without filling the required fields', () => {
+    it('6 - displays an error message when submitting the form without filling the required fields', () => {
     
       cy.contains('button', 'Send').should('be.visible').click()
       cy.get('.error').should('be.visible') 
@@ -74,7 +76,7 @@ describe('TAT Customer Service Center', () => {
 
 
     //EXERCISE 7 
-    it.only('7 - successfully submits the form using a custom command', () => {
+    it('7 - successfully submits the form using a custom command', () => {
     
       cy.fillMandatoryFieldsAndSubmit({ firstName: 'Ricardo', email: 'ricardo@example.com' })
 
@@ -84,5 +86,19 @@ describe('TAT Customer Service Center', () => {
 
     //EXERCISE 8: Your exercise is to change all the places where we identify the button for later clicking, where instead of identifying that element with cy.get(), we will use cy.contains().
 
+//SECTION 4 | LESSON 3-----------------------------------------------------------------------
 
+    
+  it('0 - selects a product (YouTube) by its content', () => {
+    cy.get('select').select('YouTube').should('have.value', 'youtube')
+    })
+
+  it('1 - selects a product (Mentorship) by its value', () => {
+    cy.get('select').select('mentorship').should('have.value', 'mentorship')
+    })
+
+    it('2 - selects a product (Blog) by its index', () => {
+      cy.get('select').select(1).should('have.value', 'blog')
+      })
+  
 })
