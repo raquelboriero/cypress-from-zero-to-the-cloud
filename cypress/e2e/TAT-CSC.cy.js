@@ -55,8 +55,7 @@ describe('TAT Customer Service Center', () => {
     cy.get('#firstName').type('Raquel')
     cy.get('#lastName').type('Boriero')
     cy.get('#email').type('raquel').should('have.value', 'raquel')
-   // cy.get('#phone').invoke('attr', 'required-mark', 'required')
-    cy.get('#phone-checkbox').click()
+    cy.get('#phone-checkbox').check().should('be.checked')
     cy.contains('button', 'Send').should('be.visible').click()
   
     cy.get('.error').should('be.visible') 
@@ -105,12 +104,15 @@ describe('TAT Customer Service Center', () => {
     cy.get('#product').select(1).should('have.value', 'blog')
     })
 
+//SECTION 5 | LESSON 4-----------------------------------------------------------------------
+
+
     it('3 - checks the type of service "Feedback"', () => {
       cy.get('input[type="radio"][value="feedback"]')
       .check().should('be.checked')
     })
 
-    it.only('4 - checks each type of service', () => {
+    it('4 - checks each type of service', () => {
 
       cy.get('#support-type').find('input[type="radio"]')
       .each(typeOfService => {
@@ -118,6 +120,22 @@ describe('TAT Customer Service Center', () => {
       })
 
     })
+
+//SECTION 6 | LESSON 5-----------------------------------------------------------------------
+
+    it.only('5 - checks both checkboxes, then unchecks the last one', () => {
+      
+      cy.get('input[type="checkbox"]')
+      .check().should('be.checked')
+      .last()
+      .uncheck().should('be.not.checked')
+
+    })
+
+
+
+
+
 
 })
 
