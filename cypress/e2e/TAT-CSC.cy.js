@@ -123,7 +123,7 @@ describe('TAT Customer Service Center', () => {
 
 //SECTION 6 | LESSON 5-----------------------------------------------------------------------
 
-    it.only('5 - checks both checkboxes, then unchecks the last one', () => {
+    it('5 - checks both checkboxes, then unchecks the last one', () => {
       
       cy.get('input[type="checkbox"]')
       .check().should('be.checked')
@@ -132,6 +132,16 @@ describe('TAT Customer Service Center', () => {
 
     })
 
+//SECTION 6 | LESSON 5-----------------------------------------------------------------------
+
+
+it.only('selects a file and verifies the file name', () => {
+  cy.get('input[type="file"]')
+    .selectFile('cypress/fixtures/example.json') // Seleciona o arquivo
+    .should('have.prop', 'files') // Verifica que a propriedade 'files' existe
+    .its('0.name') // Acessa o nome do primeiro (e único) arquivo selecionado
+    .should('equal', 'example.json'); // Verifica que o nome do arquivo é 'example.json'
+});
 
 
 
