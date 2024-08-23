@@ -135,15 +135,21 @@ describe('TAT Customer Service Center', () => {
 //SECTION 6 | LESSON 5-----------------------------------------------------------------------
 
 
-it.only('selects a file and verifies the file name', () => {
+it.only('6 - selects a file and verifies the file name', () => {
   cy.get('input[type="file"]')
-    .selectFile('cypress/fixtures/example.json') // Seleciona o arquivo
-    .should('have.prop', 'files') // Verifica que a propriedade 'files' existe
-    .its('0.name') // Acessa o nome do primeiro (e único) arquivo selecionado
-    .should('equal', 'example.json'); // Verifica que o nome do arquivo é 'example.json'
+    .selectFile('cypress/fixtures/example.json') 
+    .should(input => {
+      expect(input[0].files[0].name).to.equal('example.json')
+    })
 });
 
-
+it('7 - selects a file simulating a drag-and-drop', () => {
+  cy.get('input[type="file"]')
+  .selectFile('cypress/fixtures/example.json',{action: 'drag-drop'})
+  .should(input => {
+    expect(input[0].files[0].name).to.equal('example.json')
+  })
+})
 
 
 
