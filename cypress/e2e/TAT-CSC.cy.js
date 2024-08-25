@@ -132,10 +132,10 @@ describe('TAT Customer Service Center', () => {
 
     })
 
-//SECTION 6 | LESSON 5-----------------------------------------------------------------------
+//SECTION 7 | LESSON 6-----------------------------------------------------------------------
 
 
-it.only('6 - selects a file and verifies the file name', () => {
+it('6 - selects a file and verifies the file name', () => {
   cy.get('input[type="file"]')
     .selectFile('cypress/fixtures/example.json') 
     .should(input => {
@@ -149,6 +149,29 @@ it('7 - selects a file simulating a drag-and-drop', () => {
   .should(input => {
     expect(input[0].files[0].name).to.equal('example.json')
   })
+})
+
+it('8 - selects a file using a fixture to which an alias was given', () => {
+  cy.fixture('example.json').as('myFile')
+  cy.get('input[type="file"]').selectFile('@myFile')
+  .should(input => {
+    expect(input[0].files[0].name).to.equal('example.json')
+  })
+})
+
+//SECTION 8 | LESSON 7-----------------------------------------------------------------------
+
+it ('9 - verifies that the privacy policy page opens in another tab without the need for a click', () => {
+  cy.contains('a', 'Privacy Policy')
+  .should('have.attr', 'href', 'privacy.html')
+  .and('have.attr', 'target', '_blank')
+  
+})
+
+it ('10 - access the privacy policy page by removing the target, then clicking on the link', () => {
+  cy.contains('a', 'Privacy Policy').invoke('removeAttr', 'target')
+  .click()
+
 })
 
 
