@@ -5,6 +5,7 @@
   "main": "src/index.html",
   "scripts": {
   "cy:open": "cypress open",
+  "cy:open:mobile": "cypress open --config viewportWidth=410 viewportHeight=860",
   "test": "cypress run"
 },
 
@@ -26,6 +27,5 @@
   "license": "MIT",
   "homepage": "https://github.com/wlsf82/cypress-from-zero-to-the-cloud#readme",
   "devDependencies": {
-    "cypress": "^13.1.0"
-  }
+    "cypress": "^13.1.0"  }
 }
