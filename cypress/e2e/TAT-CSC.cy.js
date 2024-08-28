@@ -4,6 +4,8 @@
 
 describe('TAT Customer Service Center', () => {
 
+  const seconds_to_clock = 3000
+
   beforeEach(() => {
     cy.visit('./src/index.html') // visita a página antes de cada teste
   })
@@ -15,8 +17,9 @@ describe('TAT Customer Service Center', () => {
 //SECTION 3 | LESSON 2-----------------------------------------------------------------------
 
   //EXERCISE + EXERCISE 1
-  it('1 - fills in the required fields and submits the form', () => {
-    
+  it.only('1 - fills in the required fields and submits the form', () => { 
+    cy.clock() //freeze the browser's clock
+
     const longText = Cypress._.repeat('abcde', 100)
 
     cy.get('input[id="firstName"]').type('Raquel').should('have.value', 'Raquel')
@@ -28,11 +31,14 @@ describe('TAT Customer Service Center', () => {
     cy.contains('button', 'Send').should('be.visible').click()
     
     cy.get('.success').should('be.visible')   
+
+    cy.tick(seconds_to_clock)
+    cy.get('.success').should('not.be.visible')
   })
 
   //EXERCISE 2 
-  it('2 - displays an error message when submitting the form with an email with invalid formatting', () => {
-    
+  it.only('2 - displays an error message when submitting the form with an email with invalid formatting', () => {
+    cy.clock()
     cy.get('#firstName').type('Raquel')
     cy.get('#lastName').type('Boriero')
     cy.get('#email').type('raquel').should('have.value', 'raquel')
@@ -40,6 +46,9 @@ describe('TAT Customer Service Center', () => {
     cy.contains('button', 'Send').should('be.visible').click()
 
     cy.get('.error').should('be.visible')   
+
+    cy.tick(seconds_to_clock)
+    cy.get('.error').should('not.be.visible')   
   })
 
     //EXERCISE 3 
@@ -51,7 +60,8 @@ describe('TAT Customer Service Center', () => {
 
     //EXERCISE 4 
   it('4 - displays an error message when the phone becomes required but is not filled in before the form submission', () => {
-    
+    cy.clock()
+
     cy.get('#firstName').type('Raquel')
     cy.get('#lastName').type('Boriero')
     cy.get('#email').type('raquel').should('have.value', 'raquel')
@@ -59,6 +69,9 @@ describe('TAT Customer Service Center', () => {
     cy.contains('button', 'Send').should('be.visible').click()
   
     cy.get('.error').should('be.visible') 
+
+    cy.tick(seconds_to_clock)
+    cy.get('.error').should('not.be.visible')  
   })
 
     //EXERCISE 5 
@@ -72,18 +85,28 @@ describe('TAT Customer Service Center', () => {
 
     //EXERCISE 6 
     it('6 - displays an error message when submitting the form without filling the required fields', () => {
-    
+      cy.clock()
+
       cy.contains('button', 'Send').should('be.visible').click()
       cy.get('.error').should('be.visible') 
+
+      cy.tick(seconds_to_clock)
+      cy.get('.error').should('not.be.visible')  
     })
 
 
     //EXERCISE 7 
     it('7 - successfully submits the form using a custom command', () => {
     
+      cy.clock()
+
       cy.fillMandatoryFieldsAndSubmit({ firstName: 'Ricardo', email: 'ricardo@example.com' })
 
       cy.get('.success').should('be.visible') 
+
+      cy.tick(seconds_to_clock)
+      cy.get('.success').should('not.be.visible')
+  
 
     })
 
@@ -179,6 +202,13 @@ it('11 - independently test the privacy policy page', () => {
 
   cy.contains('h1', 'TAT CSC - Privacy Policy')
 })
+
+
+//SECTION 13 | LESSON 12-----------------------------------------------------------------------
+
+
+
+
 
 })
 
